@@ -1,0 +1,124 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Top Navigation Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #742a40;
+    align-items: center;
+}
+
+.profile-btn img {
+    height: 30px;
+}
+
+/* Discussion Forum Button */
+.discussion-btn {
+    background-color: #fdfde4;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.discussion-btn:hover {
+    background-color: #17a34a;
+}
+
+/* Dashboard Layout */
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    flex: 1;
+    background-image: url('images/Mask group.png'); /* Adjust the path */
+    background-size: cover; 
+}
+
+/* Left Section - Song Cover & Seek Bar */
+.left-section {
+    flex: 1;
+    text-align: center;
+}
+
+#song-cover {
+    width: 270px;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+#ed{
+    height: 40px;
+    width: 115px;
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
+
+#p-description{
+    font-size: small;
+}
+.instr-select{
+    display: flex;
+}
+.lang-select{
+    background-color: beige;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Right Section - Chords or Artist Details */
+.right-section {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Bottom Controls */
+.bottom-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background-color: #742a40;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+button {
+    background-color: #fbfbaa;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: rgb(254, 240, 137);
+}

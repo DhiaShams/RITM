@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritm Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <h1>Ritm 🎵</h1>
+        <button class="profile-btn">
+            <img src="profile.svg" alt="">
+        </button>
+    </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard">
+
+        <!-- Left Section: Song Cover & Seek Bar -->
+        <div class="left-section">
+            <img src="images/ed-sheeran.webp" alt="Artist" id="song-cover">
+            <div class="song-list">
+                <ul>
+                    <select name="Songs" id="ed">
+                        <option>Choose song</option>
+                        <option>song 1</option>
+                        <option>song 2</option>
+                        <option>song 3</option>
+                        <option>song 4</option>
+                        <option>song 5</option>
+                        <option>song 6</option>
+                        <option>song 7</option>
+                        <option>song 8</option>
+                    </select>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Section: Chords or Artist Details -->
+        <div class="right-section">
+            <div id="chords-container" class="hidden">
+                <h2>Chords</h2>
+                <p id="chords-display">🎸 Guitar: Em, C, G, D</p>
+                <p id="piano-chords-display">🎹 Piano: E minor, C major, G major, D</p>
+            </div>
+
+            <div id="artist-info">
+                <h2>Artist: Ed Sheeran</h2>
+                <p>Genre: Pop</p>
+                <p>Similar Artists: Shawn Mendes, Justin Bieber</p>
+                <p>Description:</p>
+                <p id="p-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nesciunt non illo, expedita et placeat asperiores blanditiis. Debitis, est odio suscipit at consequuntur expedita illo.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Controls: Chords, Karaoke, Share -->
+    <div class="bottom-controls">
+        <div class="instr-select">
+            <select class="lang-select">
+                <option>🎸 Show Chords</option>
+                <option>Guitar</option>
+                <option>Piano</option>
+                <option>Keyboard</option>
+            </select>
+        </div>
+        <button id="toggle-karaoke">🎤 Karaoke Mode</button>
+        <button class="share-btn">🔗 Share</button>
+        <button class="review-btn">💭 Review</button>
+    </div>
+
+
+    <script src="page-script.js"></script>
+</body>
