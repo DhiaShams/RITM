@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Upload & Discussion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #742a40;
+            color: white;
+            font-size: 1.4rem;
+        }
+        .navbar {
+            background-color: #d9c6a5;
+        }
+        .navbar a {
+            color: #742a40 !important;
+            font-size: 1.2rem;
+        }
+        .content-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        h2 {
+            font-family: 'Lobster Two', cursive;
+            color: #d9c6a5;
+            font-size: 2.2rem;
+            text-align: center;
+        }
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #d9c6a5;
+            border-color: #d9c6a5;
+            color: #742a40;
+            font-size: 1.4rem;
+        }
+        .btn-primary:hover {
+            background-color: #c3b198;
+            border-color: #c3b198;
+        }
+        .loading {
+            display: none;
+            color: #fff;
+            margin-top: 10px;
+        }
+        .success-message {
+            color: #28a745;
+        }
+        .error-message {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">rithm.</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content-section">
+        <h2>Upload Your Music</h2>
+        <input type="file" id="audioUpload" class="form-control" accept="audio/*">
+        <button class="btn btn-primary mt-3" onclick="uploadAudio()">Upload</button>
+        <div id="uploadedAudio" class="mt-3"></div>
+        <div id="loadingMessage" class="loading">Uploading...</div>
+        <div id="successMessage" class="loading success-message">File uploaded successfully!</div>
+        <div id="errorMessage" class="loading error-message">Failed to upload the file. Please try again.</div>
+        <h3>Public Discussion</h3>
+        <input type="text" id="postInput" class="form-control" placeholder="Start a discussion...">
+        <button class="btn btn-primary mt-3 w-100" onclick="addPost()">Post</button>
+        <div id="thread" class="mt-3"></div>
+    </div>
+    <script>
+        function addPost() {
+            let postInput = document.getElementById('postInput');
+            if (postInput.value.trim() === '') return;
+            let postDiv = document.createElement('div');
+            postDiv.classList.add('card', 'mb-3', 'p-3');
+            postDiv.innerHTML = `
+                <p><strong>Anonymous:</strong> ${postInput.value}</p>
+                <button class="btn btn-sm btn-outline-primary" onclick="toggleCommentBox(this)">Comment</button>
+                <button class="btn btn-sm btn-outline-success like-button" onclick="likePost(this, this.querySelector('span'))">Like (<span>0</span>)</button>
+                <div class="comment-box mt-2" style="display: none;">
+                    <input type="text" class="form-control comment-input" placeholder="Write a comment...">
+                    <button class="btn btn-sm btn-secondary mt-2" onclick="addComment(this)">Submit</button>
+                </div>
+                <div class="comments mt-3"></div>
+            `;
+            document.getElementById('thread').prepend(postDiv);
+            postInput.value = '';
+        }
+        function toggleCommentBox(button) {
+            let commentBox = button.parentElement.querySelector('.comment-box');
+            commentBox.style.display = commentBox.style.display === 'none' ? 'block' : 'none';
+        }
+        function addComment(button) {
+            let inputField = button.previousElementSibling;
+            if (inputField.value.trim() === '') return;
+            let commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment', 'mt-2', 'p-2', 'border', 'rounded');
+            commentDiv.innerHTML = `<p><strong>Anon:</strong> ${inputField.value}</p>`;
+            button.parentElement.nextElementSibling.appendChild(commentDiv);
+            inputField.value = '';
+        }
+        function likePost(button, span) {
+            if (!button.dataset.liked) {
+                span.textContent = parseInt(span.textContent) + 1;
+                button.dataset.liked = true;
+            }
+        }
+
+        function uploadAudio() {
+    const fileInput = document.getElementById('audioUpload');
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.fileUrl) {
+            document.getElementById('uploadedAudio').innerHTML = `File uploaded successfully! <a href="${data.fileUrl}" target="_blank">Click here to view it.</a>`;
+        } else {
+            document.getElementById('uploadedAudio').innerText = 'Failed to upload file';
+        }
+    })
+    .catch(error => {
+        console.error('Error uploading file:', error);
+        document.getElementById('uploadedAudio').innerText = 'Upload failed';
+    });
+}
+
+    </script>
+    <script src="server.js"></script>
+</body>
+</html>

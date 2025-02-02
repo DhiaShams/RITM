@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ritm Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        function navigateToInstrument() {
+            let select = document.getElementById("instrument-select");
+            let selectedValue = select.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            }
+        }
+    </script>
 </head>
 
 <body>
 
     <!-- Top Navigation Bar -->
     <div class="top-bar">
-        <h1>Ritm 🎵</h1>
+        <h1>ritm.</h1>
         <button class="profile-btn">
             <img src="profile.svg" alt="">
         </button>
@@ -29,7 +38,7 @@
                 <ul>
                     <select name="Songs" id="ed">
                         <option>Choose song</option>
-                        <option>song 1</option>
+                        <option>Photograph</option>
                         <option>song 2</option>
                         <option>song 3</option>
                         <option>song 4</option>
@@ -63,11 +72,10 @@
     <!-- Bottom Controls: Chords, Karaoke, Share -->
     <div class="bottom-controls">
         <div class="instr-select">
-            <select class="lang-select">
-                <option>🎸 Show Chords</option>
-                <option>Guitar</option>
-                <option>Piano</option>
-                <option>Keyboard</option>
+            <select id="instrument-select" class="lang-select" onchange="navigateToInstrument()">
+                <option value="">🎸 Show Chords</option>
+                <option value="guitar.html">Guitar</option>
+                <option value="piano.html">Piano</option>
             </select>
         </div>
         <button id="toggle-karaoke">🎤 Karaoke Mode</button>

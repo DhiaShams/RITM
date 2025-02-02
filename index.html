@@ -1,125 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="utility.css">
-    <title>ritM</title>
+    <title>Ritm - Where Music Meets Community</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #742a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 95vh;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('images/Mask group.png'); /* Add music note pattern */
+            background-size: cover;
+            opacity: 0.2; /* Adjust opacity as needed */
+            z-index: -1; /* Ensures the background image is behind content */
+        }
+        .nav {
+            background: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        .nav a {
+            text-decoration: none;
+            color: black;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .header {
+            font-size: 100px;
+            font-weight: bold;
+            font-family: 'Lobster Two', cursive;
+        }
+        .tagline {
+            font-size: 30px;
+            margin-top: -10px;
+        }
+        .cta-buttons {
+            margin-top: 20px;
+        }
+        .cta-buttons button {
+            background: white;
+            color: black;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .cta-buttons button:hover {
+            background: #333;
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 16px;
+        }
+        .features-section {
+            display: none;
+            padding: 50px;
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+    <script>
+        function showFeatures() {
+            document.querySelector('.features-section').style.display = 'block';
+            document.querySelector('.home-section').style.display = 'none';
+        }
+    </script>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="logo.svg" alt="Logo" width="40"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#"><img src="home.svg" width="20"> Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="search.svg" width="20"> Discuss</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <button class="btn btn-outline-light me-2">Sign Up</button>
-                    <button class="btn btn-light">Log In</button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <div class="flex bg-black ">
-
-        <div class="right bg-pink">
-            <div class="ritM-playlists">
-                <h1>Your Artists</h1>
-                <div class="card-container">
-                    <div class="card" ondblclick="window.location.href='page.html';">
-                        <div class="play">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40">
-                                <!-- Green Background Circle -->
-                                <circle cx="12" cy="12" r="12" fill="#FF8DB7" />
-                                <!-- Play Icon -->
-                                <path
-                                    d="M9.5 11.1998V12.8002C9.5 14.3195 9.5 15.0791 9.95576 15.3862C10.4115 15.6932 11.0348 15.3535 12.2815 14.6741L13.7497 13.8738C15.2499 13.0562 16 12.6474 16 12C16 11.3526 15.2499 10.9438 13.7497 10.1262L12.2815 9.32594C11.0348 8.6465 10.4115 8.30678 9.95576 8.61382C9.5 8.92086 9.5 9.6805 9.5 11.1998Z"
-                                    fill="black" />
-                            </svg>
-                        </div>
-                        <img src="images/artist.jpg" alt="">
-                        <h6 style="color: white">Ed Sheeran</h6>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="playbar invert">
-            <div class="seekbar">
-                <div class="circle">
-
-                </div>
-            </div>
-            <div class="aboveBar">
-
-                <div class="song-info"></div>
-                <div class="song-buttons">
-                    <img id="prev" src="prev.svg" alt="">
-                    <img id="play" src="play.svg" alt="">
-                    <img id="next" src="next.svg" alt="">
-                </div>
-                <div class="song-time"></div>
-            </div>
-        </div>
-        <div class="left">
-
-            <div class="library bg-pink color-gray">
-
-                <div class="Your-library">
-                    <img class="invert" src="libr.svg" alt="">
-                    <h3>Listen Now</h3>
-                </div>
-
-                <div class="song-list">
-
-                    <div class="music">
-                        <img class="invert" src="music.svg" alt="">
-                        <div class="info">
-                            <div>Song name</div>
-                            <div id="artist">Artist</div>
-                        </div>
-                        <img id="playNow" class="invert" src="play.svg" alt="">
-                    </div>
-                    <ul>
-                    </ul>
-                </div>
-
-                <div class="footer">
-                    <div><a href=""><span>Legal</span></a></div>
-                    <div><a href=""><span>
-                                Privacy Center</span></a></div>
-                    <div><a href=""><span>Privacy
-                                Policy</span></a></div>
-                    <div><a href=""><span>Cookies</span></a>
-                    </div>
-                    <div><a href=""><span>About
-                                Ads</span></a></div>
-                    <div><a href=""><span>Accessibility</span></a>
-                    </div>
-                </div>
-
-            </div>
+    <div class="nav">
+        <a href="#" onclick="showFeatures()">features</a>
+        <a href="#about">about</a>
+        <a href="#contact">contact</a>
+        <a href="../song.html" class="btn btn-outline-light btn-lg">Listen</a>
+    </div>
+    <div class="home-section">
+        <div class="header">ritm.</div>
+        <div class="tagline">welcome to ritm – where music meets community</div>
+        <div class="cta-buttons">
+            <button onclick="location.href='login.html'">Start Exploring</button>
+            <button onclick="location.href='disc.html'">Browse as Guest</button>
         </div>
     </div>
-    <script src="script.js"></script>
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <div class="features-section">
+        <h1>Features</h1>
+        <p>🎼 Chords & Sheet Music</p>
+        <p>🎤 Karaoke & Recording</p>
+        <p>🎧 Music Matchmaking</p>
+        <p>💬 Discussions & Playlists</p>
+    </div>
+    <div class="footer">© 2025 Ritm. All rights reserved.</div>
 </body>
-
 </html>

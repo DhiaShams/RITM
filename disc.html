@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Discussion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #742a40;
+            color: white;
+            font-size: 1.5rem;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('images/Mask group.png'); /* Add music note pattern */
+            background-size: cover;
+            opacity: 0.2; /* Adjust opacity as needed */
+            z-index: -1; /* Ensures the background image is behind content */
+        }
+        .thread-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        .nav {
+            background: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .nav a {
+            text-decoration: none;
+            color: black;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        h2{
+            font-family: 'Coffee Soda';
+            color: #d1af8b;
+            font-size: 5rem;
+        }
+        h3 {
+            font-family: 'Lobster Two', cursive;
+            color: #ddb8a5;
+            font-size: 2.5rem;
+        }
+        .btn-primary {
+            background-color: #ddb8a5;
+            border-color: #f0ad4e;
+            color: #742a40;
+            font-size: 1.5rem;
+        }
+        .btn-primary:hover {
+            background-color: #e09d3b;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .comment, .reply {
+            margin-left: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .form-control {
+            font-size: 1.2rem;
+        }
+        .like-button {
+            cursor: pointer;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="#trending">Trending</a>
+        <a href="#playlists">Playlists</a>
+        <a href="#recommendations">AI Suggestions</a>
+        <a href="#community">Community</a>
+    </div>
+    <div class="container thread-container">
+        <div class="welcome-header text-center mt-5">
+            <h2>Welcome Back!</h2>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="btn btn-outline-light btn-lg">Learn</a>
+                <a href="upload.html" class="btn btn-outline-light btn-lg">Upload</a>
+                <a href="song.html" class="btn btn-outline-light btn-lg">Listen</a>
+
+            </div>
+        </div>
+        <h3 class="text-center mt-4">Music Discussion</h3>
+        <div class="mb-4">
+            <input type="text" id="postInput" class="form-control" placeholder="Start a discussion...">
+            <button class="btn btn-primary mt-3 w-100" onclick="addPost()">Post</button>
+        </div>
+        <div id="thread" class="mt-4"></div>
+    </div>
+
+    <script>
+        function addPost() {
+            let postInput = document.getElementById('postInput');
+            if (postInput.value.trim() === '') return;
+            
+            let postDiv = document.createElement('div');
+            postDiv.classList.add('card');
+            postDiv.innerHTML = `
+                <p><strong>Anonymous:</strong> ${postInput.value}</p>
+                <button class="btn btn-sm btn-outline-primary" onclick="toggleCommentBox(this)">Comment</button>
+                <button class="btn btn-sm btn-outline-success like-button" onclick="likePost(this)" data-liked="false">Like (<span>0</span>)</button>
+                <div class="comment-box mt-3" style="display: none;">
+                    <input type="text" class="form-control comment-input" placeholder="Write a comment...">
+                    <button class="btn btn-sm btn-secondary mt-2" onclick="addComment(this)">Submit</button>
+                </div>
+                <div class="comments mt-3"></div>
+            `;
+            document.getElementById('thread').prepend(postDiv);
+            postInput.value = '';
+        }
+        
+        function toggleCommentBox(button) {
+            let commentBox = button.nextElementSibling.nextElementSibling;
+            commentBox.style.display = commentBox.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function addComment(button) {
+            let inputField = button.previousElementSibling;
+            if (inputField.value.trim() === '') return;
+            
+            let commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment');
+            commentDiv.innerHTML = `
+                <p><strong>Anon:</strong> ${inputField.value}</p>
+                <button class="btn btn-sm btn-outline-primary" onclick="toggleCommentBox(this)">Reply</button>
+                <div class="comments mt-3"></div>
+            `;
+            button.parentElement.nextElementSibling.appendChild(commentDiv);
+            inputField.value = '';
+        }
+        
+        function likePost(button) {
+            if (button.getAttribute('data-liked') === 'true') return;
+            let likeCount = button.querySelector('span');
+            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+            button.setAttribute('data-liked', 'true');
+        }
+    </script>
+</body>
+</html>

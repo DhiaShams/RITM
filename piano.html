@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photograph Chords</title>
+    <style>
+        body {
+            background-color: #742a40;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('images/Mask group.png'); /* Add music note pattern */
+            background-size: cover;
+            opacity: 0.2; /* Adjust opacity as needed */
+            z-index: -1; /* Ensures the background image is behind content */
+        }
+        h1 {
+            margin: 10px 0;
+            font-family: system-ui;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 20px;
+            flex: 1;
+            padding: 20px;
+        }
+        img {
+            width: 30%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Photograph - Ed Sheeran (Piano Chords)</h1>
+    <div class="container">
+        <img src="images/p_1.jpeg" alt="Photograph Chords 2">
+        <img src="images/p2.jpeg" alt="Photograph Chords 3">
+        <img src="images/p_3.jpeg" alt="Photograph Chords 4">
+    </div>
+</body>
+</html>
